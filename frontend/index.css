@@ -1,0 +1,53 @@
+body {
+  margin-top: 4px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+#home-page-header {
+  background-color: tomato;
+  width: 85%;
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+#home-page-banner {
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+#login {
+  margin-right: 5px;
+  float: right;
+  text-decoration: none;
+}
+
+#home-page-footer {
+  background-color: lightgray;
+  width: 85%;
+  margin: auto;
+}
+
+#home-page-content {
+  background-color: lightgray;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 85%;
+  margin: auto;
+}
+
+#context-footer-dividor {
+  border: 1px solid tomato;
+  margin: 0;
+}
+
+/*# sourceMappingURL=index.css.map */

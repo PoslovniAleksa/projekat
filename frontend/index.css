@@ -10,9 +10,17 @@ p {
   padding: 0;
 }
 
+#logo {
+  max-width: 100%;
+  max-height: 100%;
+  padding-left: 5px;
+  vertical-align: middle;
+}
+
 #home-page-header {
   background-color: tomato;
   width: 85%;
+  height: 20px;
   margin: auto;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -21,7 +29,6 @@ p {
 }
 
 #home-page-banner {
-  margin-left: 5px;
   text-decoration: none;
 }
 

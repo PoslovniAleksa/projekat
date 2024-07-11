@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Union
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Query
 import psycopg2
 from pydantic import BaseModel
 
@@ -63,7 +63,7 @@ def get_latest_news(num_news=5):
     cursor.execute(query, (num_news,))
     news_rows = cursor.fetchall()
 
-     # Prepare list of dictionaries for JSON response
+    # Prepare list of dictionaries for JSON response
     news_list = []
     for row in news_rows:
         name, date, author, website_link = row
@@ -76,16 +76,58 @@ def get_latest_news(num_news=5):
 
     return news_list
 
+
+PAGE_SIZE = 4
+
+def get_page_news(page: int):
+    offset = (page - 1) * PAGE_SIZE
+    conn = connect()
+
+    # SQL query to fetch latest news
+    query = """
+        SELECT name, date, author, website_link
+        FROM News
+        ORDER BY date DESC
+        LIMIT %s
+        OFFSET %s
+    """
+
+    try:
+        with conn.cursor() as cur:
+            cur.execute(query, (PAGE_SIZE, offset))
+            rows = cur.fetchall()
+            # Prepare list of dictionaries for JSON response
+            news_list = []
+            for row in rows:
+                name, date, author, website_link = row
+                news_list.append({
+                    "name": name,
+                    "date": date.strftime('%Y-%m-%d %H:%M:%S'),  # Format date as string
+                    "author": author,
+                    "website_link": website_link
+                })
+            return news_list
+        
+    except psycopg2.Error as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {e}")
+    finally:
+        conn.close()
+
+
 app = FastAPI()
 
 @app.get("/hello")
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/news/{num}")
-async def get_news(num: int):
-    return get_latest_news(num)
+# @app.get("/news/{num}")
+# async def get_news(num: int):
+#     return get_latest_news(num)
 
 @app.put("/add")
 async def add_news(item: NewsItem):
     return insert_news_item(item)
+
+@app.get("/news/")
+async def get_news(page: int = Query(1, ge=1)):
+    return get_page_news(page)

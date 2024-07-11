@@ -6,6 +6,15 @@ CREATE TABLE News (
     website_link VARCHAR(255)
 );
 
+
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(200) NOT NULL
+);
+
+
+
 -- INSERT INTO News (name, date, author, website_link) 
 -- VALUES 
 --     ('Breaking News 1', '2024-07-11 10:00:00', 'John Doe', 'http://example.com/news1'),

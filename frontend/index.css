@@ -70,4 +70,11 @@ li {
   cursor: pointer;
 }
 
+#search-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 /*# sourceMappingURL=index.css.map */

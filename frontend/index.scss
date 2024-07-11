@@ -69,3 +69,10 @@ li {
 .titleText:hover {
 	cursor: pointer;
 }
+
+#search-bar {
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,23 +1,16 @@
 from datetime import datetime
 from typing import Union
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, HTTPException, Depends, status
 import psycopg2
 from pydantic import BaseModel
+from conn import *;
+from user import *;
 
-def connect():
-    try:
-        conn = psycopg2.connect(
-            dbname="database",
-            user="user",
-            password="password",
-            host="postgres",  # This should match the service name in docker-compose.yml
-            port="5432"
-        )
-        return conn
-    except Exception as e:
-        print(f"I am unable to connect to the database {e}")
-        return None
-
+from datetime import datetime, timedelta
+from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from passlib.context import CryptContext
+from jose import JWTError, jwt
 
 class NewsItem(BaseModel):
     name: str
@@ -131,3 +124,17 @@ async def add_news(item: NewsItem):
 @app.get("/news/")
 async def get_news(page: int = Query(1, ge=1)):
     return get_page_news(page)
+
+# Endpoint to get token
+@app.post("/token")
+async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+    user = authenticate_user(form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid username or password")
+    access_token = create_access_token(data={"sub": user.username})
+    return {"access_token": access_token, "token_type": "bearer"}
+
+# Example protected route
+@app.get("/protected-route/")
+async def protected_route(current_user: User = Depends(get_current_user)):
+    return {"message": "This is a protected route"}

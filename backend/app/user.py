@@ -3,6 +3,7 @@ from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from jose import JWTError, jwt
+from pydantic import BaseModel
 
 from conn import connect
 
@@ -12,6 +13,12 @@ class User:
         self.id = id
         self.username = username
         self.password_hash = password_hash
+
+# for user register
+class UserCreate(BaseModel):
+    username: str
+    password: str
+
 
 # JWT settings
 SECRET_KEY = "tajna-sifra"  # Change this to a secure value

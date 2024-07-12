@@ -12,6 +12,13 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from jose import JWTError, jwt
 
+from fastapi.middleware.cors import CORSMiddleware
+# List of allowed origins (domains)
+origins = [
+    "http://localhost:8080/",  # Replace with your frontend URL
+    "https://localhost:8080/",  # If you use HTTPS for your frontend
+]
+
 class NewsItem(BaseModel):
     name: str
     author: str
@@ -108,6 +115,13 @@ def get_page_news(page: int):
 
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 
 @app.get("/hello")
 def read_root():

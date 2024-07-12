@@ -22,7 +22,8 @@ function loadContent(obj) {
 		var title = document.createElement('div');
 			var titleText = document.createElement('span');
 			titleText.className = "titleText";
-			titleText.appendChild(document.createTextNode(obj[i].name + " ."));
+			titleText.appendChild(document.createTextNode(obj[i].name));
+			//titleText.appendChild(document.createTextNode(" ("));
 			titleText.setAttribute("link", (i+1) + obj[i].name);
 			title.appendChild(titleText);
 			
@@ -35,7 +36,8 @@ function loadContent(obj) {
 		
 		var info = document.createElement('div');
 			var infoText = document.createElement('span');
-			infoText.appendChild(document.createTextNode("info"));
+			var timestamp = obj[i].date;
+			infoText.appendChild(document.createTextNode("by " + obj[i].author + " " + calculateTimeAgo(timestamp)));
 			infoText.style.color = "gray";
 			infoText.style.fontSize = "12px";
 
@@ -49,4 +51,26 @@ function loadContent(obj) {
 
 function loadNext () {
 	alert("works");
+}
+
+function calculateTimeAgo(timestamp) {
+    const date = new Date(timestamp);
+    const now = new Date();
+    const timeDifference = now - date;
+    
+    // Calculate time difference in hours
+    const hoursDifference = timeDifference / (1000 * 60 * 60);
+
+    if (hoursDifference < 1) {
+        // Calculate and return time difference in minutes
+        const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+        return `${minutesDifference} minute${minutesDifference !== 1 ? 's' : ''} ago`;
+    } else if (hoursDifference > 72) {
+        // Calculate and return time difference in days
+        const daysDifference = Math.floor(hoursDifference / 24);
+        return `${daysDifference} day${daysDifference !== 1 ? 's' : ''} ago`;
+    } else {
+        // Return time difference in hours
+        return `${Math.floor(hoursDifference)} hour${Math.floor(hoursDifference) !== 1 ? 's' : ''} ago`;
+    }
 }

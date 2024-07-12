@@ -15,8 +15,9 @@ from jose import JWTError, jwt
 from fastapi.middleware.cors import CORSMiddleware
 # List of allowed origins (domains)
 origins = [
-    "http://localhost:8080/",  # Replace with your frontend URL
-    "https://localhost:8080/",  # If you use HTTPS for your frontend
+    "http://localhost:8080",  # Replace with your frontend URL
+    "https://localhost:8080",  # If you use HTTPS for your frontendm
+    "http://localhost"
 ]
 
 class NewsItem(BaseModel):
@@ -119,7 +120,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 

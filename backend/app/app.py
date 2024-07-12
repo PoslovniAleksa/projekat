@@ -138,3 +138,32 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 @app.get("/protected-route/")
 async def protected_route(current_user: User = Depends(get_current_user)):
     return {"message": "This is a protected route"}
+
+# User registration endpoint
+@app.post("/register")
+async def register_user(user: UserCreate):
+    hashed_password = pwd_context.hash(user.password)
+    query = "INSERT INTO Users (username, password_hash) VALUES (%s, %s) RETURNING id;"
+    values = (user.username, hashed_password)
+
+    # Check if username already exists
+    query_check = "SELECT id FROM Users WHERE username = %s;"
+    values_check = (user.username,)
+
+    try:
+        conn = connect()
+        with conn.cursor() as cur:
+
+            cur.execute(query_check, values_check)
+            existing_user = cur.fetchone()
+            if existing_user:
+                raise HTTPException(status_code=400, detail="Username already registered")
+
+            cur.execute(query, values)
+            user_id = cur.fetchone()[0]
+            conn.commit()
+            return {"id": user_id, "username": user.username}
+    except psycopg2.Error as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {e}")
+    finally:
+        conn.close()

@@ -70,7 +70,7 @@ def get_latest_news(num_news=5):
     return news_list
 
 
-PAGE_SIZE = 4
+PAGE_SIZE = 10
 
 def get_page_news(page: int):
     offset = (page - 1) * PAGE_SIZE
@@ -118,7 +118,7 @@ def read_root():
 #     return get_latest_news(num)
 
 @app.put("/add")
-async def add_news(item: NewsItem):
+async def add_news(item: NewsItem, current_user: User = Depends(get_current_user)):
     return insert_news_item(item)
 
 @app.get("/news/")
@@ -126,7 +126,7 @@ async def get_news(page: int = Query(1, ge=1)):
     return get_page_news(page)
 
 # Endpoint to get token
-@app.post("/token")
+@app.post("/login")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(form_data.username, form_data.password)
     if not user:

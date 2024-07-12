@@ -1,7 +1,10 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", async function() {
 		
-	let text = '{"article" : "good article"}';
-	let obj = JSON.parse(text);
+	const apiResponse = await fetch('http://localhost:8000/news'); //http GET 
+    const data = await apiResponse.json();	
+	
+	//let text = '{"article" : "good article"}';
+	let obj = JSON.parse(data);
 	loadContent(obj);
 	
 	var search_bar = document.getElementById("search");
@@ -19,8 +22,8 @@ function loadContent(obj) {
 		var title = document.createElement('div');
 			var titleText = document.createElement('span');
 			titleText.className = "titleText";
-			titleText.appendChild(document.createTextNode(obj.article + " ."));
-			titleText.setAttribute("link", (i+1) + obj.article);
+			titleText.appendChild(document.createTextNode(obj.name + " ."));
+			titleText.setAttribute("link", (i+1) + obj.name);
 			title.appendChild(titleText);
 			
 			titleText.addEventListener('click', (function(currentI) {

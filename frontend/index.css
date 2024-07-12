@@ -10,13 +10,18 @@ p {
   padding: 0;
 }
 
+a {
+  margin: 0;
+  padding: 0;
+}
+
 ol {
   margin: 0;
 }
 
 li {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 #logo {
@@ -48,22 +53,38 @@ li {
 }
 
 #home-page-footer {
-  background-color: lightgray;
+  background-color: whitesmoke;
   width: 85%;
   margin: auto;
 }
 
 #home-page-content {
-  background-color: lightgray;
+  background-color: whitesmoke;
   margin-top: 0px;
   margin-bottom: 0px;
   width: 85%;
   margin: auto;
 }
 
+#more-news {
+  background-color: whitesmoke;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 5px;
+  width: 85%;
+  margin: auto;
+}
+
+#more-news-link {
+  padding-left: 40px;
+  text-decoration: none;
+  color: gray;
+}
+
 #context-footer-dividor {
   border: 1px solid tomato;
   margin: 0;
+  margin-top: 5px;
 }
 
 .titleText:hover {

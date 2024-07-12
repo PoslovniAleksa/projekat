@@ -127,6 +127,7 @@ async def get_news(page: int = Query(1, ge=1)):
 
 # Endpoint to get token
 @app.post("/login")
+@app.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(form_data.username, form_data.password)
     if not user:

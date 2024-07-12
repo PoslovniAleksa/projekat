@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", async function() {
     const data = await apiResponse.json();	
 	
 	//let text = '{"article" : "good article"}';
-	let obj = JSON.parse(data);
-	loadContent(obj);
+	//let obj = JSON.parse(data);
+	loadContent(data);
 	
 	var search_bar = document.getElementById("search");
 	search_bar.addEventListener('keydown', function(event) {
@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", async function() {
 });
 
 function loadContent(obj) {
-	for (let i = 0; i < 30; i++) {
+	for (let i = 0; i < obj.length; i++) {
 		var entry = document.createElement('li');
 		
 		var title = document.createElement('div');
 			var titleText = document.createElement('span');
 			titleText.className = "titleText";
-			titleText.appendChild(document.createTextNode(obj.name + " ."));
-			titleText.setAttribute("link", (i+1) + obj.name);
+			titleText.appendChild(document.createTextNode(obj[i].name + " ."));
+			titleText.setAttribute("link", (i+1) + obj[i].name);
 			title.appendChild(titleText);
 			
 			titleText.addEventListener('click', (function(currentI) {

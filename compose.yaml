@@ -24,6 +24,13 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./backend/database.sql:/docker-entrypoint-initdb.d/database.sql
 
+  web:
+    build: frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+
 volumes:
   postgres_data:
     driver: local

@@ -138,7 +138,7 @@ def insert_comment(comment: Comment, user_id: int):
     conn.commit()
 
     conn.close()
-    return {"message": "News item added successfully"}
+    return {"message": "Comment added successfully"}
 
 
 app = FastAPI()

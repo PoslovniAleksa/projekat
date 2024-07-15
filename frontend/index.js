@@ -8,9 +8,17 @@ document.addEventListener("DOMContentLoaded", async function() {
 	loadContent(data);
 	
 	var search_bar = document.getElementById("search");
-	search_bar.addEventListener('keydown', function(event) {
+	search_bar.addEventListener('keydown', async function(event) {
 		if (event.key === 'Enter') {
-			alert(search_bar.value);
+			clearContent();
+			if (search_bar.value === "") {
+				apiSearchResponse = await fetch('http://localhost:8000/news');
+			} else {
+				apiSearchResponse = await fetch('http://localhost:8000/search/' + search_bar.value);
+			}
+			
+			searchData = await apiSearchResponse.json();
+			loadContent(searchData);
 		}
 	});
 });
@@ -51,6 +59,10 @@ function loadContent(obj) {
 
 function loadNext () {
 	alert("works");
+}
+
+function clearContent() {
+	document.getElementById("content").innerHTML = "";
 }
 
 function calculateTimeAgo(timestamp) {

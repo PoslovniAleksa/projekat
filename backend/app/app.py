@@ -78,7 +78,7 @@ def get_latest_news(num_news=5):
     return news_list
 
 
-PAGE_SIZE = 10
+PAGE_SIZE = 20
 
 def get_page_news(page: int):
     offset = (page - 1) * PAGE_SIZE

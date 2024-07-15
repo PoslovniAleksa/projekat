@@ -19,8 +19,7 @@ def get_comments(news_id: int):
     """
     cursor.execute(query, (news_id,))
     rows = cursor.fetchall()
-    print(rows)
-
+    
     res = []
     for row in rows:
         comment_text, comment_date, username = row

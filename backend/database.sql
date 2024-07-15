@@ -12,6 +12,10 @@ CREATE TABLE Users (
     password_hash VARCHAR(200) NOT NULL
 );
 
+INSERT INTO Users (id, username, password_hash)
+VALUES (1, 'admin', '$2b$12$A70y/MQJt6ZKuri.ZfFLN.AfIFCwqJFxgt.oASSTaa2.sXXRumVAm');
+-- password is '123'
+
 CREATE TABLE Comments (
     id SERIAL PRIMARY KEY,
     user_id INTEGER,

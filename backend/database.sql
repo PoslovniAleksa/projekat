@@ -79,7 +79,7 @@ VALUES
     ('Food Trends', '2024-08-07 12:50:00', 'Lucas Clark', 'https://example.com/news38'),
     ('Technology Review', '2024-08-08 11:30:00', 'Lily White', 'https://example.com/news39'),
     ('Political Developments', '2024-08-09 10:00:00', 'Noah Taylor', 'https://example.com/news40'),
-    ('Health Updates', '2024-08-10 09:15:00', 'Ella Martinez', 'https://example.com/news41'),
-    ('Environmental Concerns', '2024-08-11 08:00:00', 'James Harris', 
+    ('Health Updates', '2024-08-10 09:15:00', 'Ella Martinez', 'https://example.com/news41');
+    
 
 

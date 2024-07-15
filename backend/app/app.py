@@ -31,7 +31,6 @@ class NewsItem(BaseModel):
 def insert_news_item(news_item: NewsItem):
     """Inserts a new news item into the News table."""
     conn = connect()
-
     cursor = conn.cursor()
 
     # Get current timestamp
@@ -42,13 +41,12 @@ def insert_news_item(news_item: NewsItem):
         INSERT INTO News (name, date, author, website_link) 
         VALUES (%s, %s, %s, %s)
     """
-
     # Execute the query with data
     cursor.execute(query, (news_item.name, current_time, news_item.author, news_item.website_link))
-
     # Commit the transaction
     conn.commit()
 
+    conn.close()
     return {"message": "News item added successfully"}
 
 def get_latest_news(num_news=5):
@@ -76,7 +74,7 @@ def get_latest_news(num_news=5):
             "author": author,
             "website_link": website_link
         })
-
+    conn.close()
     return news_list
 
 

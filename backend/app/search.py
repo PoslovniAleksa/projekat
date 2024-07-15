@@ -33,4 +33,5 @@ def search_news(keyword: str):
             "author": author,
             "website_link": website_link
         })
+    conn.close()
     return news_list 

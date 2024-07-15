@@ -21,65 +21,65 @@ VALUES
     ('Special Report', '2024-07-07 09:45:00', 'Chris Lee', 'http://example.com/report'),
     ('GitHub', '2024-07-07 09:45:00', 'Aleksa', 'https://github.com');
 
--- Sample rows
 INSERT INTO News (name, date, author, website_link) VALUES
-    ('Breaking News', '2024-07-12 09:00:00', 'John Doe', 'https://example.com/news/breaking'),
-    ('Tech Update', '2024-07-11 15:30:00', 'Jane Smith', 'https://example.com/news/tech-update'),
-    ('Sports Report', '2024-07-10 18:45:00', 'Mike Johnson', 'https://example.com/news/sports-report'),
-    ('World Affairs', '2024-07-09 12:00:00', 'Emily White', 'https://example.com/news/world-affairs'),
-    ('Finance News', '2024-07-08 10:15:00', 'David Brown', 'https://example.com/news/finance'),
-    ('Health Watch', '2024-07-07 11:20:00', 'Sarah Green', 'https://example.com/news/health-watch'),
-    ('Entertainment Buzz', '2024-07-06 14:00:00', 'Michael Lee', 'https://example.com/news/entertainment-buzz'),
-    ('Local Events', '2024-07-05 16:30:00', 'Jessica Taylor', 'https://example.com/news/local-events'),
-    ('Science Update', '2024-07-04 09:45:00', 'Andrew Clark', 'https://example.com/news/science-update'),
-    ('Opinion Piece', '2024-07-03 13:10:00', 'Rachel Adams', 'https://example.com/news/opinion-piece');
+    ('Latest Updates on COVID-19', '2024-07-15 08:00:00', 'Health News Team', 'https://example.com/news1'),
+    ('Tech Innovations in AI', '2024-07-14 15:30:00', 'Tech Insider', 'https://example.com/news2'),
+    ('Global Economy Report', '2024-07-14 12:45:00', 'Economic Times', 'https://example.com/news3'),
+    ('Political Unrest in Eastern Europe', '2024-07-13 18:20:00', 'World News Network', 'https://example.com/news4'),
+    ('New Discoveries in Space Exploration', '2024-07-12 10:00:00', 'Space News Weekly', 'https://example.com/news5'),
+    ('Breaking: Market Crash Analysis', '2024-07-11 16:50:00', 'Finance Today', 'https://example.com/news6'),
+    ('Interview with Nobel Prize Winner', '2024-07-10 09:15:00', 'Science Journal', 'https://example.com/news7'),
+    ('Sports Highlights of the Week', '2024-07-09 14:00:00', 'Sports News HQ', 'https://example.com/news8'),
+    ('Artificial Intelligence Ethics Debate', '2024-07-08 11:30:00', 'Ethics Watch', 'https://example.com/news9'),
+    ('Health Tips for Summer Season', '2024-07-07 07:00:00', 'Health & Wellness', 'https://example.com/news10');
 
--- Generate 50 rows of sample data for the News table
+INSERT INTO News (name, date, author, website_link) VALUES
+    ('Latest Updates on COVID-19', '2024-07-14 08:00:00', 'Health News Team', 'https://example.com/news1'),
+    ('Tech Innovations in AI', '2024-07-13 15:30:00', 'Tech Insider', 'https://example.com/news2'),
+    ('Global Economy Report', '2024-07-12 12:45:00', 'Economic Times', 'https://example.com/news3'),
+    ('Political Unrest in Eastern Europe', '2024-07-11 18:20:00', 'World News Network', 'https://example.com/news4'),
+    ('New Discoveries in Space Exploration', '2024-07-10 10:00:00', 'Space News Weekly', 'https://example.com/news5'),
+    ('Breaking: Market Crash Analysis', '2024-07-09 16:50:00', 'Finance Today', 'https://example.com/news6'),
+    ('Interview with Nobel Prize Winner', '2024-07-08 09:15:00', 'Science Journal', 'https://example.com/news7'),
+    ('Sports Highlights of the Week', '2024-07-07 14:00:00', 'Sports News HQ', 'https://example.com/news8'),
+    ('Artificial Intelligence Ethics Debate', '2024-07-06 11:30:00', 'Ethics Watch', 'https://example.com/news9'),
+    ('Health Tips for Summer Season', '2024-07-05 07:00:00', 'Health & Wellness', 'https://example.com/news10');
 
--- Inserting data into the News table
-INSERT INTO News (name, date, author, website_link) 
-VALUES 
-    ('Breaking News 1', '2024-07-01 08:00:00', 'John Doe', 'https://example.com/news1'),
-    ('Latest Update', '2024-07-02 12:30:00', 'Jane Smith', 'https://example.com/news2'),
-    ('Important Announcement', '2024-07-03 10:15:00', 'Michael Johnson', 'https://example.com/news3'),
-    ('Exclusive Interview', '2024-07-04 14:45:00', 'Emily Brown', 'https://example.com/news4'),
-    ('Special Report', '2024-07-05 11:20:00', 'David Wilson', 'https://example.com/news5'),
-    ('Top Story of the Day', '2024-07-06 09:00:00', 'Jessica Lee', 'https://example.com/news6'),
-    ('Major Event Coverage', '2024-07-07 15:00:00', 'Chris Turner', 'https://example.com/news7'),
-    ('Local News Update', '2024-07-08 13:10:00', 'Sarah Adams', 'https://example.com/news8'),
-    ('Exclusive Feature', '2024-07-09 10:45:00', 'Kevin Clark', 'https://example.com/news9'),
-    ('Market Analysis', '2024-07-10 16:30:00', 'Lisa Martinez', 'https://example.com/news10'),
-    ('Political Commentary', '2024-07-11 14:00:00', 'Andrew White', 'https://example.com/news11'),
-    ('Technology Review', '2024-07-12 12:20:00', 'Rachel Green', 'https://example.com/news12'),
-    ('Cultural Insights', '2024-07-13 11:40:00', 'Jason Taylor', 'https://example.com/news13'),
-    ('Opinion Piece', '2024-07-14 09:30:00', 'Amanda Carter', 'https://example.com/news14'),
-    ('Global Affairs Update', '2024-07-15 08:15:00', 'Eric Hall', 'https://example.com/news15'),
-    ('Financial News Brief', '2024-07-16 07:45:00', 'Karen Scott', 'https://example.com/news16'),
-    ('Health Report', '2024-07-17 17:00:00', 'Daniel Brown', 'https://example.com/news17'),
-    ('Environmental Update', '2024-07-18 16:10:00', 'Michelle Adams', 'https://example.com/news18'),
-    ('Sports Recap', '2024-07-19 14:50:00', 'Mark Wilson', 'https://example.com/news19'),
-    ('Entertainment Buzz', '2024-07-20 12:00:00', 'Laura Garcia', 'https://example.com/news20'),
-    ('Fashion Trends', '2024-07-21 10:30:00', 'Steven Davis', 'https://example.com/news21'),
-    ('Science Breakthrough', '2024-07-22 09:20:00', 'Jessica Turner', 'https://example.com/news22'),
-    ('Business Update', '2024-07-23 08:40:00', 'Michael Carter', 'https://example.com/news23'),
-    ('Educational Feature', '2024-07-24 07:00:00', 'Emily White', 'https://example.com/news24'),
-    ('Travel Highlights', '2024-07-25 18:00:00', 'David Adams', 'https://example.com/news25'),
-    ('Food and Drink Review', '2024-07-26 16:30:00', 'Julia Johnson', 'https://example.com/news26'),
-    ('Technology Trends', '2024-07-27 15:20:00', 'Samuel Wilson', 'https://example.com/news27'),
-    ('Political Analysis', '2024-07-28 13:50:00', 'Sophia Clark', 'https://example.com/news28'),
-    ('Health and Wellness', '2024-07-29 12:15:00', 'William Taylor', 'https://example.com/news29'),
-    ('Environmental Impact', '2024-07-30 10:50:00', 'Olivia Martinez', 'https://example.com/news30'),
-    ('Sports Feature', '2024-07-31 09:30:00', 'Daniel Green', 'https://example.com/news31'),
-    ('Entertainment Update', '2024-08-01 08:20:00', 'Alex Harris', 'https://example.com/news32'),
-    ('Fashion Report', '2024-08-02 07:10:00', 'Sophie Turner', 'https://example.com/news33'),
-    ('Science Discovery', '2024-08-03 19:00:00', 'Matthew Baker', 'https://example.com/news34'),
-    ('Business Insights', '2024-08-04 17:30:00', 'Anna Davis', 'https://example.com/news35'),
-    ('Educational News', '2024-08-05 16:00:00', 'Robert Wilson', 'https://example.com/news36'),
-    ('Travel Tips', '2024-08-06 14:40:00', 'Emma Adams', 'https://example.com/news37'),
-    ('Food Trends', '2024-08-07 12:50:00', 'Lucas Clark', 'https://example.com/news38'),
-    ('Technology Review', '2024-08-08 11:30:00', 'Lily White', 'https://example.com/news39'),
-    ('Political Developments', '2024-08-09 10:00:00', 'Noah Taylor', 'https://example.com/news40'),
-    ('Health Updates', '2024-08-10 09:15:00', 'Ella Martinez', 'https://example.com/news41'),
-    ('Environmental Concerns', '2024-08-11 08:00:00', 'James Harris', 
+INSERT INTO News (name, date, author, website_link) VALUES
+    ('COVID-19 Vaccine Rollout Progress', '2024-07-15 08:00:00', 'Health Watch Team', 'https://example.com/news1'),
+    ('Advancements in Quantum Computing', '2024-07-14 15:30:00', 'Tech Buzz', 'https://example.com/news2'),
+    ('Impact of Global Trade Policies', '2024-07-13 12:45:00', 'Global Insights', 'https://example.com/news3'),
+    ('Environmental Policies in Europe', '2024-07-12 18:20:00', 'Environmental News Network', 'https://example.com/news4'),
+    ('Mars Rover Latest Discoveries', '2024-07-11 10:00:00', 'Space Exploration Today', 'https://example.com/news5'),
+    ('Stock Market Analysis: Trends and Predictions', '2024-07-10 16:50:00', 'Market Insights', 'https://example.com/news6'),
+    ('Breakthroughs in Medical Research', '2024-07-09 09:15:00', 'Medical News Now', 'https://example.com/news7'),
+    ('Football Championship Highlights', '2024-07-08 14:00:00', 'Sports Recap', 'https://example.com/news8'),
+    ('Ethical Implications of AI Technology', '2024-07-07 11:30:00', 'Ethics Forum', 'https://example.com/news9'),
+    ('Healthy Eating Tips for Summer', '2024-07-06 07:00:00', 'Nutrition Matters', 'https://example.com/news10');
+
+INSERT INTO News (name, date, author, website_link) VALUES
+    ('COVID-19 Vaccine Rollout Progress', '2024-07-15 08:00:00', 'Health Watch Team', 'https://example.com/news1'),
+    ('Advancements in Quantum Computing', '2024-07-14 15:30:00', 'Tech Buzz', 'https://example.com/news2'),
+    ('Impact of Global Trade Policies', '2024-07-13 12:45:00', 'Global Insights', 'https://example.com/news3'),
+    ('Environmental Policies in Europe', '2024-07-12 18:20:00', 'Environmental News Network', 'https://example.com/news4'),
+    ('Mars Rover Latest Discoveries', '2024-07-11 10:00:00', 'Space Exploration Today', 'https://example.com/news5'),
+    ('Stock Market Analysis: Trends and Predictions', '2024-07-10 16:50:00', 'Market Insights', 'https://example.com/news6'),
+    ('Breakthroughs in Medical Research', '2024-07-09 09:15:00', 'Medical News Now', 'https://example.com/news7'),
+    ('Football Championship Highlights', '2024-07-08 14:00:00', 'Sports Recap', 'https://example.com/news8'),
+    ('Ethical Implications of AI Technology', '2024-07-07 11:30:00', 'Ethics Forum', 'https://example.com/news9'),
+    ('Healthy Eating Tips for Summer', '2024-07-06 07:00:00', 'Nutrition Matters', 'https://example.com/news10');
+
+INSERT INTO News (name, date, author, website_link) VALUES
+    ('Breakthrough in Renewable Energy', '2023-11-25 09:30:00', 'Energy Innovations Team', 'https://example.com/news1'),
+    ('New Trends in Smartphone Technology', '2023-12-03 14:45:00', 'Tech Trends', 'https://example.com/news2'),
+    ('Global Health Crisis Management Strategies', '2023-12-11 11:00:00', 'Health Strategies Group', 'https://example.com/news3'),
+    ('Political Developments in South America', '2023-12-20 17:20:00', 'World Affairs Insight', 'https://example.com/news4'),
+    ('Space Exploration: Mars Mission Updates', '2023-12-28 08:00:00', 'Space Exploration Updates', 'https://example.com/news5'),
+    ('Financial Market Analysis: Year-end Review', '2024-01-05 16:30:00', 'Financial Insights', 'https://example.com/news6'),
+    ('Interview with Nobel Prize Winner in Physics', '2024-01-14 10:15:00', 'Science Today', 'https://example.com/news7'),
+    ('Highlights from the Soccer World Cup', '2024-01-22 13:00:00', 'Sports Coverage', 'https://example.com/news8'),
+    ('Ethics Debate: AI and Privacy Concerns', '2024-01-30 15:45:00', 'Ethics in Technology', 'https://example.com/news9'),
+    ('Healthy Living Tips for the New Year', '2024-02-08 07:45:00', 'Health Insights', 'https://example.com/news10');
+
 
 

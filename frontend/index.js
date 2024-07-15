@@ -1,3 +1,7 @@
+page_start_idx = 1;
+page_number = 1;
+
+
 document.addEventListener("DOMContentLoaded", async function() {
 		
 	const apiResponse = await fetch('http://localhost:8000/news'); //http GET 
@@ -11,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 	search_bar.addEventListener('keydown', async function(event) {
 		if (event.key === 'Enter') {
 			clearContent();
+			page_start_idx = 1;
 			if (search_bar.value === "") {
 				apiSearchResponse = await fetch('http://localhost:8000/news');
 			} else {
@@ -26,18 +31,20 @@ document.addEventListener("DOMContentLoaded", async function() {
 function loadContent(obj) {
 	for (let i = 0; i < obj.length; i++) {
 		var entry = document.createElement('li');
+		entry.setAttribute('value', page_start_idx);
+		page_start_idx++;
 		
 		var title = document.createElement('div');
 			var titleText = document.createElement('span');
 			titleText.className = "titleText";
 			titleText.appendChild(document.createTextNode(obj[i].name));
 			//titleText.appendChild(document.createTextNode(" ("));
-			titleText.setAttribute("link", (i+1) + obj[i].name);
+			titleText.setAttribute("link", obj[i].website_link);
 			title.appendChild(titleText);
 			
 			titleText.addEventListener('click', (function(currentI) {
 				return function() {
-					alert(this.getAttribute("link"));
+					window.location.href = this.getAttribute("link");
 				};
 			})(i));
 		entry.appendChild(title);
@@ -57,8 +64,12 @@ function loadContent(obj) {
 	}
 }
 
-function loadNext () {
-	alert("works");
+async function loadNext () {
+	clearContent();
+	page_number++;
+	apiLoadResponse = await fetch('http://localhost:8000/news/?page=' + page_number);
+	loadData = await apiLoadResponse.json();
+	loadContent(loadData);
 }
 
 function clearContent() {

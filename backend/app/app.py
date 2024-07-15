@@ -5,6 +5,8 @@ import psycopg2
 from pydantic import BaseModel
 from conn import *;
 from user import *;
+from search import search_news;
+
 
 from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException, Depends, status
@@ -183,3 +185,9 @@ async def register_user(user: UserCreate):
         raise HTTPException(status_code=500, detail=f"Database error: {e}")
     finally:
         conn.close()
+
+
+# User registration endpoint
+@app.get("/search/{keyword}")
+async def search(keyword: str):
+    return search_news(keyword)

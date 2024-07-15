@@ -3,10 +3,10 @@ from typing import Union
 from fastapi import FastAPI, HTTPException, Query, HTTPException, Depends, status
 import psycopg2
 from pydantic import BaseModel
-from conn import *;
-from user import *;
-from search import search_news;
-
+from conn import *
+from user import *
+from search import search_news
+from comments import get_comments
 
 from datetime import datetime, timedelta
 from fastapi import FastAPI, HTTPException, Depends, status
@@ -27,6 +27,9 @@ class NewsItem(BaseModel):
     author: str
     website_link: str
 
+class Comment(BaseModel):
+    comment_text: str
+    news_id: int
     
 def insert_news_item(news_item: NewsItem):
     """Inserts a new news item into the News table."""
@@ -86,7 +89,7 @@ def get_page_news(page: int):
 
     # SQL query to fetch latest news
     query = """
-        SELECT name, date, author, website_link
+        SELECT name, date, author, website_link, id
         FROM News
         ORDER BY date DESC
         LIMIT %s
@@ -100,12 +103,13 @@ def get_page_news(page: int):
             # Prepare list of dictionaries for JSON response
             news_list = []
             for row in rows:
-                name, date, author, website_link = row
+                name, date, author, website_link, id = row
                 news_list.append({
                     "name": name,
                     "date": date.strftime('%Y-%m-%d %H:%M:%S'),  # Format date as string
                     "author": author,
-                    "website_link": website_link
+                    "website_link": website_link,
+                    "id": id 
                 })
             return news_list
         
@@ -113,6 +117,28 @@ def get_page_news(page: int):
         raise HTTPException(status_code=500, detail=f"Database error: {e}")
     finally:
         conn.close()
+
+
+def insert_comment(comment: Comment, user_id: int):
+    """Inserts a new comment"""
+    conn = connect()
+    cursor = conn.cursor()
+
+    # Get current timestamp
+    current_time = datetime.now()
+
+    # SQL query to insert news item
+    query = """
+        INSERT INTO Comments (user_id, news_id, comment_date, comment_text) 
+        VALUES (%s, %s, %s, %s)
+    """
+    # Execute the query with data
+    cursor.execute(query, (user_id, comment.news_id, current_time, comment.comment_text))
+    # Commit the transaction
+    conn.commit()
+
+    conn.close()
+    return {"message": "News item added successfully"}
 
 
 app = FastAPI()
@@ -132,7 +158,7 @@ def read_root():
 # async def get_news(num: int):
 #     return get_latest_news(num)
 
-@app.put("/add")
+@app.put("/add-news")
 async def add_news(item: NewsItem, current_user: User = Depends(get_current_user)):
     return insert_news_item(item)
 
@@ -189,3 +215,12 @@ async def register_user(user: UserCreate):
 @app.get("/search/{keyword}")
 async def search(keyword: str):
     return search_news(keyword)
+
+
+@app.get("/comments/{news_id}")
+async def comments(news_id: int):
+    return get_comments(news_id)
+
+@app.put("/add-comment")
+async def add_comment(comment: Comment, current_user: User = Depends(get_current_user)):
+    return insert_comment(comment, current_user.id)

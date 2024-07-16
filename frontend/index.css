@@ -98,4 +98,29 @@ li {
   align-items: center;
 }
 
+.login-register-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form_element {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.form_element label {
+  flex: 1;
+}
+
+.form_element input {
+  flex: 2;
+}
+
 /*# sourceMappingURL=index.css.map */

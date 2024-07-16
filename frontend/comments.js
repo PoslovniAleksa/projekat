@@ -1,6 +1,8 @@
 // Function to fetch comments from API
 async function fetchComments() {
-    const apiUrl = 'http://localhost:8000/comments/1'; // Replace with your actual API endpoint
+
+    const newsId = localStorage.getItem('selectedNewsId')
+    const apiUrl = 'http://localhost:8000/comments/' + 1; // Replace with your actual API endpoint
   
     try {
       const response = await fetch(apiUrl);
@@ -20,7 +22,8 @@ async function fetchComments() {
     try {
       const comments = await fetchComments();
       const commentsList = document.getElementById('commentsList');
-      console.log(comments)
+      commentsList.innerHTML = ''
+
       comments.forEach(comment => {
         const li = document.createElement('li');
         li.className = 'comment';
@@ -41,6 +44,20 @@ async function fetchComments() {
   
         commentsList.appendChild(li);
       });
+
+      // Display selected post title
+      const title = localStorage.getItem('selectedNewsTitle')
+      const author = localStorage.getItem('selectedNewsAuthor')
+      const weblink = localStorage.getItem('selectedNewsWeblink')
+      
+      const titleElement = document.getElementById('NewsTitle')
+      const authorElement = document.getElementById('Author')
+      const weblinkElement = document.getElementById('weblink')
+
+      titleElement.textContent = title;
+      authorElement.textContent = author;
+      weblinkElement.textContent = weblink;
+
     } catch (error) {
       console.error('Error displaying comments:', error);
       // Handle error, e.g., display error message to user

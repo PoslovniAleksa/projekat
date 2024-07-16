@@ -1,14 +1,25 @@
-page_start_idx = 1;
-page_number = 1;
+let page_start_idx = 1;
+let page_number = 1;
+let user_name = "";
+
+export function changeUsername (new_username) {
+	//document.getElementById("login").innerHTML = "Hello " + new_username;
+	localStorage.setItem("username", new_username);
+	//alert("new username " + user_name); 
+}
+
+export function getUsername () {
+	return user_name;
+}
 
 
 document.addEventListener("DOMContentLoaded", async function() {
-		
 	const apiResponse = await fetch('http://localhost:8000/news'); //http GET 
     const data = await apiResponse.json();	
-	
-	//let text = '{"article" : "good article"}';
-	//let obj = JSON.parse(data);
+
+	if(localStorage.getItem("username") != null) {
+		document.getElementById("login").innerHTML = "Hello " + localStorage.getItem("username");
+	}
 	loadContent(data);
 	
 	var search_bar = document.getElementById("search");
@@ -51,9 +62,26 @@ function loadContent(obj) {
 		var info = document.createElement('div');
 			var infoText = document.createElement('span');
 			var timestamp = obj[i].date;
-			infoText.appendChild(document.createTextNode("by " + obj[i].author + " " + calculateTimeAgo(timestamp)));
+			var comments = document.createElement('a');
+			localStorage.setItem("selectedNewsId" + i, obj[i].id);
+			localStorage.setItem("selectedNewsTitle" + i, obj[i].name);
+			localStorage.setItem("selectedNewsAuthor" + i, obj[i].author);
+			localStorage.setItem("selectedNewsWeblink" + i, obj[i].website_link);
+			//comments.setAttribute('href', "http://localhost:8080/index.html");
+			comments.innerHTML = "comments";
+			infoText.appendChild(document.createTextNode("by " + obj[i].author + " " + calculateTimeAgo(timestamp) + " | "));
+			infoText.appendChild(comments);
 			infoText.style.color = "gray";
 			infoText.style.fontSize = "12px";
+			comments.addEventListener('click', (function(currentI) {
+				return function() {
+					localStorage.setItem("selectedNewsId", localStorage.getItem("selectedNewsId" + i));
+					localStorage.setItem("selectedNewsTitle", localStorage.getItem("selectedNewsTitle" + i));
+					localStorage.setItem("selectedNewsAuthor", localStorage.getItem("selectedNewsAuthor" + i));
+					localStorage.setItem("selectedNewsWeblink", localStorage.getItem("selectedNewsWeblink" + i));
+					//window.location.href = this.getAttribute("link");
+				};
+			})(i));
 
 		info.appendChild(infoText);
 		entry.appendChild(info);

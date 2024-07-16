@@ -1,3 +1,5 @@
+import { changeUsername, getUsername } from "./index.js"
+
 document.addEventListener("DOMContentLoaded", async function() {
 		
 	const register_button = document.getElementById("register_button");
@@ -6,8 +8,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 	
 	login_button.addEventListener("click", async function() {
 		event.preventDefault();
-		username = document.getElementById('login_username').value;
-		password = document.getElementById('login_password').value;
+		let username = document.getElementById('login_username').value;
+		let password = document.getElementById('login_password').value;
 		
 		const payload = new URLSearchParams({
             "grant_type": "",
@@ -31,7 +33,8 @@ document.addEventListener("DOMContentLoaded", async function() {
 
             if (response.ok) {
                 const responseData = await response.json();
-                alert('Login successful: ' + responseData["access_token"]);
+				changeUsername(username);
+                document.location.href = 'http://localhost:8080/index.html';
                 // Handle successful login here
             } else {
                 const errorData = await response.json();

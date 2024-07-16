@@ -2,7 +2,7 @@
 async function fetchComments() {
 
     const newsId = localStorage.getItem('selectedNewsId')
-    const apiUrl = 'http://localhost:8000/comments/' + 1; // Replace with your actual API endpoint
+    const apiUrl = 'http://localhost:8000/comments/' + newsId; // Replace with your actual API endpoint
   
     try {
       const response = await fetch(apiUrl);
@@ -64,8 +64,52 @@ async function fetchComments() {
     }
   }
   
+
+  // Function to add a new comment
+  async function addComment(commentText) {
+    const apiUrl = 'http://localhost:8000/add-comment';
+    
+    const jwtToken = localStorage.getItem('jwtToken');
+    const newsId = localStorage.getItem('selectedNewsId');
+    const newCommentInput = document.getElementById('commentInput').value;
+    console.log(jwtToken)
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + jwtToken 
+        },
+        body: JSON.stringify({
+          comment_text: newCommentInput,
+          news_id: newsId
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add comment');
+      }
+
+      // Refresh the page to display the newly added comment
+      location.reload();
+
+    } catch (error) {
+      console.error('Error adding comment:', error);
+      // Handle error, e.g., display error message to the user
+    }
+  }
+
   // Call displayComments function when the DOM content is loaded
   document.addEventListener('DOMContentLoaded', function() {
     displayComments();
+  });
+
+  // Function to handle the 'Add Comment' button click
+  document.getElementById('addCommentBtn').addEventListener('click', function() {
+    const commentText = document.getElementById('commentInput').value;
+    if (commentText.trim() !== '') {
+      addComment(commentText);
+    }
   });
   

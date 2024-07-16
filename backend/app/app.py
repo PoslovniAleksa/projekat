@@ -129,10 +129,11 @@ def insert_comment(comment: Comment, user_id: int):
 
         # Check if page exist
         check_query = """
-        SELECT EXISTS (SELECT 1 FROM Users WHERE id = %s);
+        SELECT EXISTS (SELECT 1 FROM News WHERE id = %s);
         """
         cursor.execute(check_query, (comment.news_id, ))
-        if cursor.fetchone():
+        check_res = cursor.fetchone()
+        if not check_res[0]:
             raise HTTPException(status_code=404, detail="News with provided ID can not be found")
 
         # Get current timestamp

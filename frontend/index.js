@@ -12,6 +12,50 @@ export function getUsername () {
 	return user_name;
 }
 
+function login(username, password) {
+	const loginUrl = 'http://localhost:8000/login';  // Replace with your actual login endpoint
+  
+	// Form data to send in the POST request body
+	const formData = new URLSearchParams();
+	formData.append('username', username);
+	formData.append('password', password);
+	formData.append('grant_type', '');  // Adjust as needed based on your server requirements
+	formData.append('scope', '');
+	formData.append('client_id', '');
+	formData.append('client_secret', '');
+  
+	const options = {
+	  method: 'POST',
+	  headers: {
+		'Content-Type': 'application/x-www-form-urlencoded',
+		'Accept': 'application/json'
+	  },
+	  body: formData
+	};
+  
+	return fetch(loginUrl, options)
+	  .then(response => {
+		if (!response.ok) {
+		  throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		return response.json();
+	  })
+	  .then(data => {
+		// Assuming the response contains a token or user information
+		console.log('Login successful:', data);
+		// Handle successful login, e.g., store token in session storage
+		sessionStorage.setItem('accessToken', data.access_token);
+		// Optionally return data or perform other actions
+		return data;
+	  })
+	  .catch(error => {
+		console.error('Login failed:', error);
+		// Handle fetch errors or server errors
+		// Example: show error message to user or retry login
+		throw error;  // Propagate the error for further handling if needed
+	  });
+  }
+  
 
 document.addEventListener("DOMContentLoaded", async function() {
 	const apiResponse = await fetch('http://localhost:8000/news'); //http GET 

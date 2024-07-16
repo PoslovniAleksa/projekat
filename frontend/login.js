@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", async function() {
             if (response.ok) {
                 const responseData = await response.json();
 				changeUsername(username);
+				localStorage.setItem("access_token", responseData["access_token"]);
                 document.location.href = 'http://localhost:8080/index.html';
                 // Handle successful login here
             } else {

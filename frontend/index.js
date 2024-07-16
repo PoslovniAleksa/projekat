@@ -61,8 +61,17 @@ document.addEventListener("DOMContentLoaded", async function() {
 	const apiResponse = await fetch('http://localhost:8000/news'); //http GET 
     const data = await apiResponse.json();	
 
-	if(localStorage.getItem("username") != null) {
-		document.getElementById("login").innerHTML = "Hello " + localStorage.getItem("username");
+	if(localStorage.getItem("username") != null && localStorage.getItem("username") != "") {
+		document.getElementById("login-button").innerHTML = "Hello " + localStorage.getItem("username");
+		var button = document.createElement("button");
+		button.textContent = "Logout";
+		document.getElementById("login").appendChild(button);
+		
+		button.addEventListener("click", function() {
+			localStorage.setItem("username", "");
+			localStorage.setItem("access_token", "");
+			location.reload();
+		});
 	}
 	loadContent(data);
 	
@@ -123,7 +132,7 @@ function loadContent(obj) {
 					localStorage.setItem("selectedNewsTitle", localStorage.getItem("selectedNewsTitle" + i));
 					localStorage.setItem("selectedNewsAuthor", localStorage.getItem("selectedNewsAuthor" + i));
 					localStorage.setItem("selectedNewsWeblink", localStorage.getItem("selectedNewsWeblink" + i));
-					//window.location.href = this.getAttribute("link");
+					window.location.href = ("http://localhost:8080/comments.html");
 				};
 			})(i));
 

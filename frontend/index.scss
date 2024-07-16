@@ -97,3 +97,33 @@ li {
     justify-content: center;
     align-items: center;
 }
+
+// Define variables for reuse
+$post-font-size: 24px;
+$comment-font-size: 18px;
+
+// Comments section styles
+.comments {
+    list-style-type: none;
+    padding: 0;
+
+    // Individual comment styles
+    .comment {
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+
+      // Comment text styles
+      p {
+        font-size: $comment-font-size;
+        margin: 0;
+      }
+
+      // Commenter name styles
+      strong {
+        font-weight: bold;
+      }
+    }
+  }

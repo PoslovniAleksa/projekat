@@ -98,4 +98,23 @@ li {
   align-items: center;
 }
 
+.comments {
+  list-style-type: none;
+  padding: 0;
+}
+.comments .comment {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.comments .comment p {
+  font-size: 18px;
+  margin: 0;
+}
+.comments .comment strong {
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=index.css.map */

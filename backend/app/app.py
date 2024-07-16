@@ -19,7 +19,8 @@ from fastapi.middleware.cors import CORSMiddleware
 origins = [
     "http://localhost:8080",  # Replace with your frontend URL
     "https://localhost:8080",  # If you use HTTPS for your frontendm
-    "http://localhost"
+    "http://localhost",
+    "*"
 ]
 
 class NewsItem(BaseModel):

@@ -1,5 +1,7 @@
 ovo je link za swagger docs (ovde je localhost, ali na konzoli pise 0.0.0.0) http://127.0.0.1:8000/docs
 
+# Default user: username: adming, password: 123
+
 # API:
 * GET hello : vraca json {hello: world}
 * GET news : vraca redove iz tabele News, koristi page-ove (news/?page=)

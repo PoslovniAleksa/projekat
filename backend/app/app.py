@@ -121,24 +121,37 @@ def get_page_news(page: int):
 
 def insert_comment(comment: Comment, user_id: int):
     """Inserts a new comment"""
-    conn = connect()
-    cursor = conn.cursor()
+    
+    try:
+        conn = connect()
+        cursor = conn.cursor()
 
-    # Get current timestamp
-    current_time = datetime.now()
+        # Check if page exist
+        check_query = """
+        SELECT EXISTS (SELECT 1 FROM Users WHERE id = %s);
+        """
+        cursor.execute(check_query, (comment.news_id, ))
+        if cursor.fetchone():
+            raise HTTPException(status_code=404, detail="News with provided ID can not be found")
 
-    # SQL query to insert news item
-    query = """
-        INSERT INTO Comments (user_id, news_id, comment_date, comment_text) 
-        VALUES (%s, %s, %s, %s)
-    """
-    # Execute the query with data
-    cursor.execute(query, (user_id, comment.news_id, current_time, comment.comment_text))
-    # Commit the transaction
-    conn.commit()
+        # Get current timestamp
+        current_time = datetime.now()
 
-    conn.close()
-    return {"message": "Comment added successfully"}
+        # SQL query to insert news item
+        query = """
+            INSERT INTO Comments (user_id, news_id, comment_date, comment_text) 
+            VALUES (%s, %s, %s, %s)
+        """
+        # Execute the query with data
+        cursor.execute(query, (user_id, comment.news_id, current_time, comment.comment_text))
+        # Commit the transaction
+        conn.commit()
+        return {"message": "Comment added successfully"}
+    
+    except psycopg2.Error as e:
+        raise HTTPException(status_code=500, detail=f"Database error: {e}")
+    finally:
+        conn.close()
 
 
 app = FastAPI()

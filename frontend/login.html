@@ -2,32 +2,35 @@
 <head>
 	<title>WG News Login & Register</title>
 	<link rel="stylesheet" href="index.css">
+	<script src="login.js"></script>
 </head>
 
 <body>
-	<div class="container">
+	<div class="login-register-container">
 		<h2>Login</h2>
-		<form>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br>
-            <input type="submit" value="Login">
+		<form class="login_form">
+			<div class="form_element">
+				<label for="login_username">Username:</label>
+				<input type="text" id="login_username" name="login_username" required><br>
+			</div>
+			<div class="form_element">
+				<label for="login_password">Password:</label>
+				<input type="password" id="login_password" name="login_password" required><br>
+			</div>
+            <input type="submit" value="Login" id="login_button">
         </form>
 
-		<a>New User?</a>
-
 		<h2>Register</h2>
-        <form>
-            <label for="username">Username:</label><br>
-            <input type="text" id="username" name="username" required><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email" required><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" required><br>
-            <label for="confirm_password">Confirm Password:</label><br>
-            <input type="password" id="confirm_password" name="confirm_password" required><br>
-            <input type="submit" value="Register">
+        <form class="register_form">
+			<div class="form_element">
+				<label for="register_username">Username:</label>
+				<input type="text" id="register_username" name="register_username" required><br>
+			</div>
+			<div class="form_element">
+				<label for="register_password">Password:</label>
+				<input type="password" id="register_password" name="register_password" required><br>
+			</div>
+            <input type="submit" value="Register" id="register_button">
         </form>
 
 	</div>

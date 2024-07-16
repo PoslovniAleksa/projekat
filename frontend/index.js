@@ -82,7 +82,6 @@ function loadContent(obj) {
 			var titleText = document.createElement('span');
 			titleText.className = "titleText";
 			titleText.appendChild(document.createTextNode(obj[i].name));
-			//titleText.appendChild(document.createTextNode(" ("));
 			titleText.setAttribute("link", obj[i].website_link);
 			title.appendChild(titleText);
 			

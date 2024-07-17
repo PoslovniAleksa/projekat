@@ -69,10 +69,10 @@ async function fetchComments() {
   async function addComment(commentText) {
     const apiUrl = 'http://localhost:8000/add-comment';
     
-    const jwtToken = localStorage.getItem('jwtToken');
+    const jwtToken = localStorage.getItem("access_token");
     const newsId = localStorage.getItem('selectedNewsId');
     const newCommentInput = document.getElementById('commentInput').value;
-    console.log(jwtToken)
+    
     try {
       const response = await fetch(apiUrl, {
         method: 'PUT',

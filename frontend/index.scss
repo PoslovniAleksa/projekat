@@ -75,10 +75,14 @@ li {
 	margin: auto;
 }
 
-#more-news-link {
+#more_news_link {
 	padding-left: 40px;
 	text-decoration: none;
 	color: gray;
+}
+
+#more_news_link:hover {
+	cursor: pointer;
 }
 
 #context-footer-dividor {

@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", async function() {
 
 	if(localStorage.getItem("username") != null && localStorage.getItem("username") != "") {
 		document.getElementById("login-button").innerHTML = "Hello " + localStorage.getItem("username");
+		document.getElementById("login-button").removeAttribute('href');
 		var button = document.createElement("button");
 		button.textContent = "Logout";
 		document.getElementById("login").appendChild(button);
@@ -90,6 +91,10 @@ document.addEventListener("DOMContentLoaded", async function() {
 			loadContent(searchData);
 		}
 	});
+	
+	more_news_link.addEventListener('click', async function(){
+		loadNext();
+	});
 });
 
 function loadContent(obj) {
@@ -116,6 +121,7 @@ function loadContent(obj) {
 			var infoText = document.createElement('span');
 			var timestamp = obj[i].date;
 			var comments = document.createElement('a');
+			comments.href = '#';
 			localStorage.setItem("selectedNewsId" + i, obj[i].id);
 			localStorage.setItem("selectedNewsTitle" + i, obj[i].name);
 			localStorage.setItem("selectedNewsAuthor" + i, obj[i].author);
@@ -147,8 +153,8 @@ function loadContent(obj) {
 async function loadNext () {
 	clearContent();
 	page_number++;
-	apiLoadResponse = await fetch('http://localhost:8000/news/?page=' + page_number);
-	loadData = await apiLoadResponse.json();
+	let apiLoadResponse = await fetch('http://localhost:8000/news/?page=' + page_number);
+	let loadData = await apiLoadResponse.json();
 	loadContent(loadData);
 }
 
